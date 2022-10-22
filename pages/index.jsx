@@ -22,7 +22,7 @@ const Home =(props) => {
       
       var requestOptions = {
         method: 'GET',
-        redirect: 'follow'
+       
       };
       
       nfts= await fetch(url, requestOptions).then((response)=>response.json())
@@ -32,7 +32,7 @@ const Home =(props) => {
       console.log("fetching nfts for collection owned by address")
       var requestOptions = {
         method: 'GET',
-        redirect: 'follow'
+        
       };
       const fetchURL = `${baseURL}/getNFTs/?owner=${wallet}&contractAddresses%5B%5D=${collection}`;
       nfts= await fetch(fetchURL, requestOptions).then(data => data.json())
@@ -57,7 +57,7 @@ const Home =(props) => {
       
       var requestOptions = {
         method: 'GET',
-        redirect: 'follow'
+        
       };
       
       nfts= await fetch(url, requestOptions).then((response)=>response.json())
@@ -67,7 +67,7 @@ const Home =(props) => {
       console.log("fetching nfts for collection owned by address")
       var requestOptions = {
         method: 'GET',
-        redirect: 'follow'
+        
       };
       const fetchURL = `${baseURL}/getNFTs/?owner=${wallet}&pageKey=${Pagekey}
       &contractAddresses%5B%5D=${collection}`;
@@ -91,7 +91,7 @@ const Home =(props) => {
     const url = `${baseURL}?contractAddress=${collection}&withMetadata=${"true"}`;
     var requestOptions = {
       method: 'GET',
-      redirect: 'follow'
+      
     };
     
     const nfts= await fetch(url, requestOptions).then((response)=>response.json())
@@ -111,7 +111,7 @@ const fetchNFTforCollectionWpage=async()=>{
     const url = `${baseURL}?contractAddress=${collection}&withMetadata=${"true"}&startToken=${Pagekey}`;
     var requestOptions = {
       method: 'GET',
-      redirect: 'follow'
+      
     };
     
     const nfts= await fetch(url, requestOptions).then((response)=>response.json())
