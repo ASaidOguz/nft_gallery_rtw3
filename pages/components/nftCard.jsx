@@ -1,7 +1,7 @@
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
 import { useState } from 'react'
-import {Alert} from "reactstrap";
-export const NFTCard=({nft})=>{
+
+ const NFTCard=({nft})=>{
    const[copysuccess,setCopysuccess]=useState("")
    const copyonClickboard=()=>{
     console.log(nft.contract.address)
@@ -37,7 +37,7 @@ export const NFTCard=({nft})=>{
     </div>
     )
 }
-
+export default NFTCard
 
 
 
