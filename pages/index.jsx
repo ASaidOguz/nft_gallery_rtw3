@@ -1,14 +1,16 @@
 
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import {NFTCard} from './components/nftCard'
+import nft from "../styles/images/nft.jpg"
 const Home =(props) => {
   const[wallet,setWallet]=useState("")
   const[collection,setCollection]=useState("")
   const[NFTs,setNFTs]=useState([])
   const[fetchforCollection,setFetchforCollection]=useState(false)
   const[Pagekey,setPagekey]=useState("")
+
   //fetchNFTs fetches nfts with wallet address or 
   //wallet address+collection(how many nft person has from that collection)
   const fetchNFTs=async()=>{
@@ -43,7 +45,7 @@ const Home =(props) => {
       
     }
     //After the fetch it will scroll to start of the page ...
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 425);
   }
   //fetchNFTswPage if api call has pagekey this fetch will get other pages 
   const fetchNFTswPage=async()=>{
@@ -79,7 +81,7 @@ const Home =(props) => {
       
     }
     //After the fetch it will scroll to start of the page ...
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 425); 
   }
   //fetchNFTforCollection fetching the nft collection data..
   const fetchNFTforCollection=async()=>{
@@ -101,7 +103,7 @@ const Home =(props) => {
     }
   }
   //After the fetch it will scroll to start of the page ...
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 425);
 }
 const fetchNFTforCollectionWpage=async()=>{
   if(collection.length){
@@ -121,11 +123,13 @@ const fetchNFTforCollectionWpage=async()=>{
     }
   }
   //After the fetch it will scroll to start of the page ...
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 425);
 }
 
   return (
-    <div className="bg-lime-400">
+   
+    
+    <div className="bg-fuchsia-600">
     <div id="mydiv"className="flex min-h-screen flex-col items-center justify-center py-2">
       <div className="flex flex-col w-full justify-center items-center gap-y-2">
         {!fetchforCollection&&
@@ -137,10 +141,11 @@ const fetchNFTforCollectionWpage=async()=>{
         <input
         className="w-2/5 bg-slate-100 py-2 px-2 rounded-lg text-gray-800 focus:outline-blue-300 disabled:bg-slate-50 disabled:text-gray-50" 
         onChange={(e)=>{setCollection(e.target.value)
-        setPagekey("")}} 
+        }} 
         type={"text"} placeholder="add your collection address"></input>
         
-        <label><input onChange={(e)=>{setFetchforCollection(e.target.checked)}}
+        <label><input onChange={(e)=>{setFetchforCollection(e.target.checked) 
+                                      setWallet("")}}
         type={"checkbox"}></input>for Collection</label>
         <button 
         className={"disabled:bg-slate-500 text-white bg-blue-400 px-4 py-2 mt-3 rounded-sm w-1/5"}
@@ -153,6 +158,11 @@ const fetchNFTforCollectionWpage=async()=>{
             
            }    
           }}>Let's go!</button>
+          <Image   
+      src={nft} 
+      height={300}  
+      width={1000} 
+      />
          <div className='flex flex-wrap gap-y-12 mt-4 w-5/6 gap-x-2 justify-center'>
         { 
           NFTs.map(nft =>( 
@@ -176,6 +186,7 @@ const fetchNFTforCollectionWpage=async()=>{
       </div>
     </div>
     </div>
+   
   )
 }
 

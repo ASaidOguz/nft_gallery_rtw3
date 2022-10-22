@@ -2,15 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn{
-    margin-left: 1em;
-    background-color: #008CBA; /* Blue */
-    border:aqua;
-    color: white;
-    padding: 8px 20px;
-    text-align: center;
-    text-decoration:solid;
-    display: inline-block;
-    font-size: 10px;
-    border-radius: 12px;
-}
