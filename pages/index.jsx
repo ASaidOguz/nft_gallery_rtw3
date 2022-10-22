@@ -17,9 +17,9 @@ const Home =(props) => {
     let nfts;
     
     if (!collection.length){
-      const baseURL = process.env.NEXT_PUBLIC_baseURL
+      const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4"
       const url = `${baseURL}/getNFTs/?owner=${wallet}`;
-      
+      console.log(baseURL)
       var requestOptions = {
         method: 'GET',
        
@@ -28,7 +28,7 @@ const Home =(props) => {
       nfts= await fetch(url, requestOptions).then((response)=>response.json())
       
     }else{
-      const baseURL = process.env.NEXT_PUBLIC_baseURL
+      const baseURL ="https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4"
       console.log("fetching nfts for collection owned by address")
       var requestOptions = {
         method: 'GET',
@@ -52,7 +52,7 @@ const Home =(props) => {
     let nfts;
     
     if (!collection.length){
-      const baseURL = process.env.NEXT_PUBLIC_baseURL
+      const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4"
       const url = `${baseURL}/getNFTs/?owner=${wallet}&pageKey=${Pagekey}`;
       
       var requestOptions = {
@@ -63,7 +63,7 @@ const Home =(props) => {
       nfts= await fetch(url, requestOptions).then((response)=>response.json())
       
     }else{
-      const baseURL = process.env.NEXT_PUBLIC_baseURL
+      const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4"
       console.log("fetching nfts for collection owned by address")
       var requestOptions = {
         method: 'GET',
@@ -87,7 +87,7 @@ const Home =(props) => {
   const fetchNFTforCollection=async()=>{
    
    if(collection.length){
-    const baseURL = process.env.NEXT_PUBLIC_baseURL2
+    const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4/getNFTsForCollection/"
     const url = `${baseURL}?contractAddress=${collection}&withMetadata=${"true"}`;
     var requestOptions = {
       method: 'GET',
@@ -107,7 +107,8 @@ const Home =(props) => {
 }
 const fetchNFTforCollectionWpage=async()=>{
   if(collection.length){
-    const baseURL = process.env.NEXT_PUBLIC_baseURL2
+    const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4/getNFTsForCollection/"
+    
     const url = `${baseURL}?contractAddress=${collection}&withMetadata=${"true"}&startToken=${Pagekey}`;
     var requestOptions = {
       method: 'GET',
