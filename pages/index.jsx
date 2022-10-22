@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
-import NFTCard from './components/NFTCard'
+import NFTCard from '../components/NFTCard'
 import nft from "../styles/images/nft.jpg"
 const Home =(props) => {
   const[wallet,setWallet]=useState("")
