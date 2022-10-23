@@ -10,12 +10,14 @@ const Home =(props) => {
   const[NFTs,setNFTs]=useState([])
   const[fetchforCollection,setFetchforCollection]=useState(false)
   const[Pagekey,setPagekey]=useState("")
-
+  const[nftCount,setNftCount]=useState(0)
+  const[currentNft,setCurrentNft]=useState(1)
   //fetchNFTs fetches nfts with wallet address or 
   //wallet address+collection(how many nft person has from that collection)
   const fetchNFTs=async()=>{
     let nfts;
-    
+    //Each main fetch the starting page will be 1 
+    setCurrentNft(1)
     if (!collection.length){
       const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4"
       const url = `${baseURL}/getNFTs/?owner=${wallet}`;
@@ -42,6 +44,14 @@ const Home =(props) => {
       console.log("Page key is: ",nfts.pageKey)
       console.log(nfts)
       setPagekey(nfts.pageKey) 
+      //setting page number via totalCount field of the response
+      if(nfts.totalCount/100){
+        const pageNumber=nfts.totalCount/100;
+        if(nfts.totalCount%100!=0){
+         pageNumber++
+        }
+        setNftCount(Math.floor(pageNumber))
+      }
       
     }
     //After the fetch it will scroll to start of the page ...
@@ -50,7 +60,7 @@ const Home =(props) => {
   //fetchNFTswPage if api call has pagekey this fetch will get other pages 
   const fetchNFTswPage=async()=>{
     let nfts;
-    
+    let counter=currentNft
     if (!collection.length){
       const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4"
       const url = `${baseURL}/getNFTs/?owner=${wallet}&pageKey=${Pagekey}`;
@@ -81,11 +91,13 @@ const Home =(props) => {
       
     }
     //After the fetch it will scroll to start of the page ...
+    counter++
+    setCurrentNft(counter)
     window.scrollTo(0, 425); 
   }
   //fetchNFTforCollection fetching the nft collection data..
   const fetchNFTforCollection=async()=>{
-   
+    
    if(collection.length){
     const baseURL = "https://eth-mainnet.g.alchemy.com/v2/bxt60U0lIpNSTnVowyQAkrYJLlds2WI4/getNFTsForCollection/"
     const url = `${baseURL}?contractAddress=${collection}&withMetadata=${"true"}`;
@@ -102,6 +114,8 @@ const Home =(props) => {
       //console.log(NFTs)
     }
   }
+
+
   //After the fetch it will scroll to start of the page ...
   window.scrollTo(0, 425);
 }
@@ -131,8 +145,15 @@ const fetchNFTforCollectionWpage=async()=>{
    
     
     <div className="bg-fuchsia-600">
-    <div id="mydiv"className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <div className="flex flex-col w-full justify-center items-center gap-y-2">
+        <div class="text-5xl text-rose-700 italic antialiased "><strong>Nomad's Nft Gallery</strong></div>
+        <div className='text-base italic mb-2'>
+        <p ><strong>Welcome to Nomad's nft gallery.Here you can easly query your nfts where resides in etherium block chain.</strong></p>
+        <li>Just  insert the wallet address which you want to query for and Let's go</li>
+        <li>If you want to query how many item does the wallet have for specific collection , just add desired nft collection's address on second input</li> 
+        <li>And last but not least you can easly query the collection by tick the checkbox and lets go</li>
+        </div>
         {!fetchforCollection&&
         <input 
         className="w-2/5 bg-slate-100 py-2 px-2 rounded-lg text-gray-800 focus:outline-blue-300 disabled:bg-slate-50 disabled:text-gray-50" 
@@ -172,18 +193,21 @@ const fetchNFTforCollectionWpage=async()=>{
         }
         </div>
         <div className='flex flex-wrap gap-y-12 mt-4 w-5/6 gap-x-2 justify-center'>
-      {Pagekey&&<button className={"disabled:bg-slate-500 text-white bg-blue-400 px-4 py-2 mt-3 rounded-sm w-1/5"}
+      {Pagekey?<button className={"disabled:bg-slate-500 text-white bg-blue-400 px-4 py-2 mt-3 rounded-sm w-1/5"}
        onClick={
         ()=>{
           if(fetchforCollection){
-            fetchNFTforCollectionWpage() }
+            fetchNFTforCollectionWpage()
+           }
          else{
           fetchNFTswPage()
           
          }}}  
-      >Next Page for NFTs</button>}
+      >{!fetchforCollection?`Next Page ${currentNft}/${nftCount}`:"Next Page"}</button>:
+       (nftCount?<button disabled="true" className={"disabled:bg-slate-500 text-white bg-blue-400 px-4 py-2 mt-3 rounded-sm w-1/5"}>
+      {!fetchforCollection?`Final Page ${currentNft}/${nftCount}`:"Final Page"}</button>:"")}
+      
       </div >
-     
       </div>
     </div>
     </div>
