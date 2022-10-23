@@ -191,7 +191,7 @@ const fetchNFTforCollectionWpage=async()=>{
             <NFTCard nft={nft}/>
           ))
         }
-        </div>:<p><strong>You need to make query to see NFT's</strong></p>}
+        </div>:<p><strong>You need to make a query to see NFT's</strong></p>}
         <div className='flex flex-wrap gap-y-12 mt-4 w-5/6 gap-x-2 justify-center'>
       {Pagekey?<button className={"disabled:bg-slate-500 text-white bg-blue-400 px-4 py-2 mt-3 rounded-sm w-1/5"}
        onClick={
