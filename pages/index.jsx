@@ -185,13 +185,13 @@ const fetchNFTforCollectionWpage=async()=>{
       height={300}  
       width={1000} 
       />
-         <div className='flex flex-wrap gap-y-12 mt-4 w-5/6 gap-x-2 justify-center'>
+        { NFTs.length?<div className='flex flex-wrap gap-y-12 mt-4 w-5/6 gap-x-2 justify-center'>
         { 
           NFTs.map(nft =>( 
             <NFTCard nft={nft}/>
           ))
         }
-        </div>
+        </div>:<p><strong>You need to make query to see NFT's</strong></p>}
         <div className='flex flex-wrap gap-y-12 mt-4 w-5/6 gap-x-2 justify-center'>
       {Pagekey?<button className={"disabled:bg-slate-500 text-white bg-blue-400 px-4 py-2 mt-3 rounded-sm w-1/5"}
        onClick={
