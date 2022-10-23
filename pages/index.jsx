@@ -152,7 +152,7 @@ const fetchNFTforCollectionWpage=async()=>{
         <p ><strong>Welcome to Nomad's nft gallery.Here you can easly query your nfts where resides in etherium block chain.</strong></p>
         <li>Just  insert the wallet address which you want to query for and Let's go</li>
         <li>If you want to query how many item does the wallet have for specific collection , just add desired nft collection's address on second input</li> 
-        <li>And last but not least you can easly query the collection by tick the checkbox and lets go</li>
+        <li>And last but not least you can easily query the collection by tick the checkbox and lets go</li>
         </div>
         {!fetchforCollection&&
         <input 
